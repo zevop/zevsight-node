@@ -1,0 +1,50 @@
+{
+  "name": "@zevsight/node",
+  "version": "0.1.0",
+  "description": "Send logs and heartbeats from Node.js to ZevSight. Includes a pino transport.",
+  "license": "MIT",
+  "author": "ZevOp",
+  "homepage": "https://zevsight.com",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zevop/zevsight-node.git"
+  },
+  "keywords": ["zevsight", "logging", "logs", "observability", "pino", "pino-transport", "heartbeat"],
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": { "types": "./dist/index.d.mts", "default": "./dist/index.mjs" },
+      "require": { "types": "./dist/index.d.ts", "default": "./dist/index.js" }
+    },
+    "./pino": {
+      "import": { "types": "./dist/pino.d.mts", "default": "./dist/pino.mjs" },
+      "require": { "types": "./dist/pino.d.ts", "default": "./dist/pino.js" }
+    },
+    "./package.json": "./package.json"
+  },
+  "files": ["dist"],
+  "sideEffects": false,
+  "engines": { "node": ">=18" },
+  "scripts": {
+    "build": "tsup",
+    "typecheck": "tsc --noEmit -p tsconfig.test.json",
+    "lint": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:integration": "ZS_INTEGRATION=1 vitest run tests/integration.test.ts",
+    "prepublishOnly": "npm run build"
+  },
+  "dependencies": {
+    "pino-abstract-transport": "^3.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "pino": "^10.4.0",
+    "tsup": "^8.5.0",
+    "typescript": "~5.9.0",
+    "vitest": "^3.2.0"
+  },
+  "publishConfig": { "access": "public" }
+}
